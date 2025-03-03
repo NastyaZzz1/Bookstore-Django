@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BOOKSTORE</title>
+  </head>
+  <body style="font-family: sans-serif">
+    <header>
+        <h1>Book catalog</h1>
+    </header>
+    <main>
+        <h3>{{ count }} элементов на странице</h3>
+        <button name="add_element">Добавить новый элемент</button>
+        {% for book in all_books %}
+        <p style="line-height: 0.5; font-size: 1.5rem">{{ book.name }}</p>
+        <p style="line-height: 0.5">{{ book.author }}</p>
+        <p style="line-height: 0.5">{{ book.cost }}</p>
+        <p style="line-height: 0.5">{{ book.genre }}</p>
+        <button name="change">Изменить</button>
+        <button name="delete">Удалить</button>
+        <hr>
+        {% endfor %}
+    </main>
+  </body>
+</html>
