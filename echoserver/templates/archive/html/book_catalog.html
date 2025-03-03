@@ -11,6 +11,7 @@
     </header>
     <main>
         <h3>{{ count }} элементов на странице</h3>
+        
         <button name="add_element">Добавить новый элемент</button>
         {% for book in all_books %}
         <p style="line-height: 0.5; font-size: 1.5rem">{{ book.name }}</p>
