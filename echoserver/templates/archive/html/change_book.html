@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BOOKSTORE</title>
+  </head>
+  <body style="font-family: sans-serif">
+    <header>
+        <h1>Изменить товар</h1>
+    </header>
+    <main>
+        <h3>Название товара {{ book.name }}</h3>
+        <form method="POST">
+          {% csrf_token %}
+          <p>
+              <label>Название</label><br>
+              {{ form.name }}
+          </p>
+          <p>
+              <label>Автор</label><br>
+              {{ form.author }}
+          </p>
+          <p>
+            <label>Стоимость</label><br>
+              {{ form.cost }}
+          </p>
+          <p>
+            <label>Жанр</label><br>
+              {{ form.genre }}            
+          </p>
+          <!-- {{ form.as_p }} -->
+          <input type="submit" value="Сохранить" >
+      </form>
+        <a href="{% url 'home' %}">Назад</a>
+        <a href="{% url 'home' %}">Изменить</a>
+    </main>
+  </body>
+</html>
