@@ -1,0 +1,128 @@
+@font-face {
+	font-family: 'Yagi';
+	src: url("{% static 'fonts/DXS Yagi Bold_0.ttf' %}") format("truetype");
+	
+}
+
+header {
+	padding: 0% 4%;
+	/* background-color: rgb(224, 224, 249); */
+	height: 65px;
+	margin-bottom: 2%;
+	display: flex;
+	align-items: center;
+	background: linear-gradient(to bottom right, rgb(224, 224, 249), #c0c5ef);
+}
+
+body, h1 { margin: 0; }
+
+h1 {
+	vertical-align: middle;
+	font-family: 'Yagi';
+	font-size: 2.5em;
+}
+
+span {
+	font-weight: 600;
+	font-size: 1.2em;
+	color: #6DCAFF;
+}
+
+.items {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 2% 4% 4%;
+
+}
+
+.count_and_add {
+	display: flex;
+	align-content: center;
+	margin: 0% 4%;
+	gap: 60px;
+}
+
+.count {
+	margin: 0;
+	padding: 7px 0px;
+	font-size: 1.1em;
+}
+
+.add_item_but {
+	padding: 8px 20px;
+	box-shadow: #a6c8ee 4px 4px 10px 0;
+	border-radius: 8px;
+	background-color: #8fbaff;
+	color: white;
+	font-size: 1.1em;
+	text-decoration: none;
+}
+
+.add_item_but:not(:disabled):hover {
+	transform: scale(1.02);
+}
+
+.add_item_but:not(:disabled):hover:active {
+	box-shadow: #a6c8ee 0 0 0 0;
+}
+
+.but_change_del {
+	display: flex;
+	justify-content: space-between;
+
+}
+
+.item {
+	padding: 15px;
+	border: 1px solid #6DCAFF;
+	border-radius: 10px;
+	width: 25%;
+	margin-bottom: 4%;
+	background-color: rgb(241, 241, 252);
+}
+
+.item:not(:disabled):hover {
+	border: 1px solid #206fc9;
+}
+
+.cost {
+	font-size: 1.3em;
+	color:#6DCAFF;
+	font-weight: 600;
+}
+
+
+button {
+    width: 7.5em;
+    height: 2.2em;
+    color:#206fc9;
+    background-color: white;
+    border: 1px solid #CACACA;
+    border-radius: 18px;
+    font-weight: bold;
+}
+
+.change_but {
+	color: #206fc9;
+	text-decoration: none;
+	background-color: white;
+	border: 1px solid #206fc9;
+	box-shadow: #a6c8ee 4px 4px 5px 0;
+    border-radius: 18px;
+	padding: 4px 14px;
+	font-size: 0.9em;
+	font-weight: bold;
+}
+
+.change_but:not(:disabled):hover {
+	transform: scale(1.05);
+}
+
+.change_but:not(:disabled):hover:active {
+	box-shadow: #a6c8ee 0 0 0 0;
+}
+
+button:not(:disabled):hover {
+	transform: scale(1.05);
+}

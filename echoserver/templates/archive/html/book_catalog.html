@@ -1,8 +1,11 @@
+{% load static %}
+
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
     <title>BOOKSTORE</title>
   </head>
   <body style="font-family: sans-serif">
@@ -10,25 +13,32 @@
         <h1>Book catalog</h1>
     </header>
     <main>
-        <h3>{{ count }} элементов на странице</h3>
 
-        <a href="{% url 'add_item' %}">Добавить новый элемент</a>
-        
+      <div class="count_and_add">
+        <p class="count">Книг в каталоге: <span>{{ count }}</span></p>
+        <a href="{% url 'add_item' %}" class="add_item_but">Добавить книгу <b>+</b></a>
+      </div>
+
+      <div class="items">
         {% for book in all_books %}
-        <p style="line-height: 0.5; font-size: 1.5rem">{{ book.name }}</p>
-        <p style="line-height: 0.5">{{ book.author }}</p>
-        <p style="line-height: 0.5">{{ book.cost }}</p>
-        <p style="line-height: 0.5">{{ book.genre }}</p>
+        <div class="item">
+          <p style="line-height: 0.5; font-size: 1.5rem">{{ book.name }}</p>
+          <h4 style="line-height: 0.5">{{ book.author }}</h4>
+          <p style="line-height: 0.5">{{ book.genre }}</p>
+          <p style="line-height: 0.5" class="cost">{{ book.cost }} ₽</p>
+          
+          <div class="but_change_del">
+            <a href="{% url 'change_item' book.id %}" class="change_but">Изменить</a>
 
-        <a href="{% url 'change_item' book.id %}">Изменить</a>
-
-        <form action="{% url 'delete_item' book.id %}" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить этот элемент?');">
-          {% csrf_token %}
-          <button type="submit">Удалить</button>
-        </form>
-
-        <hr>
+            <form action="{% url 'delete_item' book.id %}" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить этот элемент?');">
+              {% csrf_token %}
+              <button type="submit">Удалить</button>
+            </form>
+          </div>
+          
+        </div>
         {% endfor %}
+      </div>
     </main>
   </body>
 </html>
