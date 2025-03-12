@@ -4,37 +4,30 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles_change_and_add.css' %}">
     <title>BOOKSTORE</title>
   </head>
   <body style="font-family: sans-serif">
     <header>
-        <h1>Изменить товар</h1>
+        <h1>Change the product</h1>
     </header>
     <main>
-        <h3>Название товара {{ book.name }}</h3>
+        <h2>{{ book.name }}</h2>
         <form method="POST">
           {% csrf_token %}
-          <p>
-              <label>Название</label><br>
-              {{ form.name }}
-          </p>
-          <p>
-              <label>Автор</label><br>
-              {{ form.author }}
-          </p>
-          <p>
-            <label>Стоимость</label><br>
-              {{ form.cost }}
-          </p>
-          <p>
-            <label>Жанр</label><br>
-              {{ form.genre }}            
-          </p>
-          <input type="submit" value="Сохранить" >
+          <label>Название</label><br>
+          <p class="form">{{ form.name }}</p>
+          <label>Автор</label><br>
+          <p class="form">{{ form.author }}</p>
+          <label>Стоимость</label><br>
+          <p class="form">{{ form.cost }}</p>
+          <label>Жанр</label><br>
+          <p class="form">{{ form.genre }}</p>
+          <div class="buttons">
+            <a href="{% url 'home' %}" class="but_back">Назад</a>
+            <input type="submit" class="but_save" value="Сохранить" >
+          </div>
       </form>
-        <a href="{% url 'home' %}">Назад</a>
-        <a href="{% url 'home' %}">Изменить</a>
     </main>
   </body>
 </html>

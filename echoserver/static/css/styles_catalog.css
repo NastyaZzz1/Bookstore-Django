@@ -6,7 +6,6 @@
 
 header {
 	padding: 0% 4%;
-	/* background-color: rgb(224, 224, 249); */
 	height: 65px;
 	margin-bottom: 2%;
 	display: flex;
@@ -67,10 +66,9 @@ span {
 	box-shadow: #a6c8ee 0 0 0 0;
 }
 
-.but_change_del {
+.but_change_del, .step-links {
 	display: flex;
 	justify-content: space-between;
-
 }
 
 .item {
@@ -78,7 +76,7 @@ span {
 	border: 1px solid #6DCAFF;
 	border-radius: 10px;
 	width: 25%;
-	margin-bottom: 4%;
+	margin-bottom: 2%;
 	background-color: rgb(241, 241, 252);
 }
 
@@ -108,21 +106,37 @@ button {
 	text-decoration: none;
 	background-color: white;
 	border: 1px solid #206fc9;
-	box-shadow: #a6c8ee 4px 4px 5px 0;
+    box-shadow: #b4ceec 3px 3px 10px 0;
     border-radius: 18px;
 	padding: 4px 14px;
 	font-size: 0.9em;
 	font-weight: bold;
 }
 
-.change_but:not(:disabled):hover {
+button:hover, .change_but:not(:disabled):hover {
 	transform: scale(1.05);
 }
 
 .change_but:not(:disabled):hover:active {
 	box-shadow: #a6c8ee 0 0 0 0;
+} 
+
+main { margin-bottom: 3%; }
+
+.page-link {
+	text-decoration: none;
+	color: black;
 }
 
-button:not(:disabled):hover {
-	transform: scale(1.05);
+ul { list-style-type: none; }
+
+ul.pagination {
+	display: flex;
+	gap: 2%;
 }
+
+#active { color:#6DCAFF; }
+
+.hand:hover, #notactive:hover { color: #7eaefd; }
+
+

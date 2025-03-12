@@ -1,16 +1,24 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ItemForm
 from .models import Books
+from django.core.paginator import Paginator
+
 
 
 def homePageView(request):
     all_books = Books.objects.all()
     count = Books.objects.all().count()
 
+    paginator = Paginator(all_books, 9)
+
+    page_number = request.GET.get('page')
+
+    page_obj = paginator.get_page(page_number)
+
     context = {
         'all_books' : all_books,
-        'count' : count    
+        'count' : count,
+        'page_obj' : page_obj   
     }
     return render(request, 'html/book_catalog.html', context=context)
 

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static '/css/styles_catalog.css' %}">
     <title>BOOKSTORE</title>
   </head>
   <body style="font-family: sans-serif">
@@ -20,7 +20,7 @@
       </div>
 
       <div class="items">
-        {% for book in all_books %}
+        {% for book in page_obj %}
         <div class="item">
           <p style="line-height: 0.5; font-size: 1.5rem">{{ book.name }}</p>
           <h4 style="line-height: 0.5">{{ book.author }}</h4>
@@ -39,6 +39,29 @@
         </div>
         {% endfor %}
       </div>
+
+      <div class="pagination">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link hand" href="?page={{ page_obj.previous_page_number }}">← Предыдущая страница</a></li>
+          {% endif %}
+          
+          {% for i in page_obj.paginator.page_range %}
+            {% if i >= page_obj.number|add:'-1' and i <= page_obj.number|add:'1' %}
+              {% if i == page_obj.number %}
+                <li class="page-item"><span class="page-link" id="active">{{ i }}</span></li>
+              {% else %}
+                <li class="page-item"><a class="page-link" id="notactive" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+            
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link hand" href="?page={{ page_obj.next_page_number }}">Следующая страница →</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
     </main>
   </body>
 </html>

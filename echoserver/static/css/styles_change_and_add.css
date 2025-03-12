@@ -1,0 +1,84 @@
+@font-face {
+	font-family: 'Yagi';
+	src: url("{% static 'fonts/DXS Yagi Bold_0.ttf' %}") format("truetype");
+	
+}
+
+header {
+	padding: 0% 4%;
+	height: 65px;
+	margin-bottom: 2%;
+	display: flex;
+	align-items: center;
+	background: linear-gradient(to bottom right, rgb(224, 224, 249), #c0c5ef);
+}
+
+body, h1 { margin: 0; }
+
+h1 { font-family: 'Yagi'; }
+
+main { margin-top: 5%; }
+
+form { margin: 2% 40%; }
+
+h2 {
+    margin-left: 40%;
+    font-weight: 500;
+}
+
+input {
+    border-radius: 10px; 
+    padding: 10px;
+    width: 80%;
+    border: 1px solid #6DCAFF;
+    font-size: 1.0em;
+}
+
+input:focus {
+    border: 1px solid #206fc9;
+    outline: none;
+}
+
+label { color: #89888f; }
+
+.form { margin-top: 6px; }
+
+.but_back {
+    color:#206fc9;
+    background-color: white;
+    border: 1px solid #CACACA;
+    border-radius: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 30px;
+    margin-left: 2%;
+}
+
+.but_save {
+    margin-left: 8%;
+    width: 7.5em;
+    color:#206fc9;
+    background-color: white;
+    border: 1px solid #206fc9;
+    border-radius: 20px;
+    font-weight: bold;
+    box-shadow: #b4ceec 3px 3px 10px 0;
+}
+
+.buttons {
+    display: flex;
+    margin-top: 15%;
+}
+
+.but_save:not(:disabled):active {
+    box-shadow: #b4ceec 0 0 0;
+}
+
+.but_back:not(:disabled):active {
+    border: 1px solid #206fc9;
+}
+
+.but_back:hover, .but_save:hover {
+	transform: scale(1.05);
+}
+

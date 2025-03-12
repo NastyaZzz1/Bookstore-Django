@@ -4,35 +4,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles_change_and_add.css' %}">
     <title>BOOKSTORE</title>
   </head>
   <body style="font-family: sans-serif">
     <header>
-        <h1>Добавить товар</h1>
+        <h1>Add the product</h1>
     </header>
     <main>
+        <h2>Заполни карточку книги</h2>
         <form method="POST">
           {% csrf_token %}
-          <p>
-              <label>Введите название</label><br>
-              <input name="name" type="text" />
-          </p>
-          <p>
-              <label>Введите автора</label><br>
-              <input name="author" type="text" />
-          </p>
-          <p>
-            <label>Введите cтоимость</label><br>
-            <input name="cost" type="number" />
-          </p>
-          <p>
-            <label>Введите жанр</label><br>
-            <input name="genre" type="text" />
-          </p>
-          <input type="submit" value="Сохранить" >
+          <label>Введите название</label><br>
+          <p class="form">
+            <input name="name" type="text" /></p>
+          <label>Введите автора</label><br>
+          <p class="form"><input name="author" type="text" /></p>
+          <label>Введите cтоимость</label><br>
+          <p class="form"><input name="cost" type="number" /></p>
+          <label>Введите жанр</label><br>
+          <p class="form"><input name="genre" type="text" /></p>
+          <div class="buttons">
+            <a href="{% url 'home' %}" class="but_back">Назад</a>
+            <input type="submit" class="but_save" value="Сохранить" >
+          </div> 
       </form>
-      <a href="{% url 'home' %}">Назад</a>
     </main>
   </body>
 </html>
