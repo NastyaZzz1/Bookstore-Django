@@ -5,53 +5,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=" {% static 'user_app/css/reg.css' %} ">
+    <link rel="stylesheet" href="{% static 'css/styles_change_and_add.css' %}">
     <title> {{ title }} </title>
 </head>
 <body>
-    <header class="header">
-        <div class="">chtoto</div>
-    </header>
-    <form action="", method="post">
+    <form action="", method="post" class="reg_or_log_form">
         {% csrf_token %}
-        <div class="reg-or-log">
-            <span class="reg">Регистрация</span>
-            <a href="{% url 'login' %}" class="log">Вход</a>
+        <div class="reg_or_log">
+            <span id="reg">Регистрация</span>
+            <a href="{% url 'login' %}" id="log">Вход</a>
         </div>
 
-        <div class="name">
+        <div class="name field">
             {{ form.first_name }}
         </div>
 
-        <div class="login">
+        <div class="login field">
             {{ form.username }}
         </div>
 
-        <div class="email">
+        <div class="email field">
             {{ form.email }}
         </div>
 
-        <div class="password">
+        <div class="password field">
             {{ form.password1 }}
-            <button class="password_btn">
-                <!-- <img src=" {% static 'svg/password-open.svg' %} " alt="img"> -->
+            <button class="password_1_btn_reg" onclick="togglePassword1()">
+                <img src=" {% static 'svg/password-open.svg' %} " alt="img">
             </button>
         </div>
 
-        <div class="password">
+        <div class="password field">
             {{ form.password2 }}
-            <button class="password_btn">
-                <!-- <img src=" {% static 'svg/password-open.svg' %} " alt="img"> -->
+            <button class="password_2_btn_reg" onclick="togglePassword2()">
+                <img src=" {% static 'svg/password-open.svg' %} " alt="img">
             </button>
         </div>
 
         {% if form.non_field_errors %}
         <div>{{ form.non_field_errors }}</div>
         {% endif %}
-        <button type="submit">Сохранить</button>
+        <div class="buttons">
+            <a href="{% url 'home' %}" class="but_back">Назад</a>
+            <button type="submit" class="auth_but">Сохранить</button>
+        </div>
     </form>
-    <a href="{% url 'home' %}" class="but_back">Назад</a>
-    <!-- {% comment %} <script src="../scripts/login.js"></script> {% endcomment %} -->
 </body>
 {% endblock %}
 </html>
+
+
+<script>
+    function togglePassword1() {
+        const passwordField = document.querySelector('input[name="password1"]');
+        if (passwordField.type === 'password') passwordField.type = 'text';
+        else passwordField.type = 'password';
+    }
+    function togglePassword2() {
+        const passwordField = document.querySelector('input[name="password2"]');
+        if (passwordField.type === 'password') passwordField.type = 'text';
+        else passwordField.type = 'password';
+    }
+</script>

@@ -10,8 +10,34 @@ header {
 	margin-bottom: 2%;
 	display: flex;
 	align-items: center;
-	/* justify-content: space-between;	 */
+	justify-content: space-between;	
 	background: linear-gradient(to bottom right, rgb(224, 224, 249), #c0c5ef);
+}
+
+li {
+	list-style-type: none;
+	margin-right: 1%;
+}
+
+.logout {
+	color: black;
+	text-decoration: none;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 18px;
+	padding: 4px 14px;
+	font-size: 0.9em;
+	margin-left: 12%;
+}
+
+.logout:hover {
+	border: 1px solid #6DCAFF;
+}
+
+.username {
+	font-size: 1.3em;
+	font-weight: 600;
+	color: #206fc9;
 }
 
 body, h1 { margin: 0; }

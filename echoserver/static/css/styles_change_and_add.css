@@ -4,6 +4,40 @@
 	
 }
 
+.reg_or_log_form {
+    margin-top: 10%;
+}
+
+.field {
+    margin: 5% 0;
+}
+
+span {
+    opacity: 100% !important;
+}
+
+.reg_or_log {
+    display: flex;
+    gap: 21%;
+    padding-bottom: 5%;
+} 
+
+#log {
+    text-decoration: none;
+    color: #0D0D0D;
+    font-weight: bold;
+    font-size: 1.6em;
+    opacity: 20%;
+}
+
+#reg {
+    color: #0D0D0D;
+    font-weight: bold;
+    font-size: 1.6em;
+    text-decoration: none;
+    opacity: 20%;
+}
+
 header {
 	padding: 0% 4%;
 	height: 65px;
@@ -54,7 +88,8 @@ label { color: #89888f; }
     margin-left: 2%;
 }
 
-.but_save {
+
+.but_save, .auth_but {
     margin-left: 8%;
     width: 7.5em;
     color:#206fc9;
@@ -70,6 +105,17 @@ label { color: #89888f; }
     margin-top: 15%;
 }
 
+.password_btn, .password_1_btn_reg, .password_2_btn_reg {
+    position: absolute;
+    right: 43%;
+    border: none;
+    background-clip: content-box;
+}
+
+.password_btn { top: 39%; }
+.password_1_btn_reg { top: 54%; }
+.password_2_btn_reg { top: 62%; }
+
 .but_save:not(:disabled):active {
     box-shadow: #b4ceec 0 0 0;
 }
@@ -78,7 +124,7 @@ label { color: #89888f; }
     border: 1px solid #206fc9;
 }
 
-.but_back:hover, .but_save:hover {
+.but_back:hover, .but_save:hover, .auth_but:hover {
 	transform: scale(1.05);
 }
 

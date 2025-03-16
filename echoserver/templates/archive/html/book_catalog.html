@@ -12,9 +12,9 @@
     <header>
         <h1>Book catalog</h1>
         {% if user.is_authenticated %}
-        <li> <a >{{ user.username }}</a> | <a href="{% url 'logout' %}">Выйти</a></li>
+        <li> <a class="username">{{ user.username }}</a><a href="{% url 'logout' %}" class="logout">Выйти</a></li>
         {% else %}
-        <button type="submit" class="main-submit-white" onclick="window.location.href='{% url 'login' %}';">Войти<img src=" {% static 'svg/arrow-left-white.svg' %} " class="submit-arrow-color" width="17" height="17"></button>
+        <button type="submit" class="main-submit-white" onclick="window.location.href='{% url 'login' %}';">Войти</button>
         {% endif %}
     </header>
     <main>

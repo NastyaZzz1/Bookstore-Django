@@ -5,35 +5,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=" {% static 'user_app/css/reg.css' %} ">
+    <link rel="stylesheet" href="{% static 'css/styles_change_and_add.css' %}">
     <title> {{ title }} </title>
 </head>
 <body>
-    <form action="", method="post">
+    <form action="", method="post" class="reg_or_log_form">
         {% csrf_token %}
-        <div class="reg-or-log">
-            <span class="log">Вход</span>
-            <a href="{% url 'register' %}" class="reg">Регистрация</a>
+        <div class="reg_or_log">
+            <span id="log">Вход</span>
+            <a href="{% url 'register' %}" id="reg">Регистрация</a>
         </div>
 
-        <div class="login">
+        <div class="login field">
             {{ form.username }}
         </div>
 
-        <div class="password">
+        <div class="password field">
             {{ form.password }}
-            <button class="password_btn">
-                <!-- <img src=" {% static 'svg/password-open.svg' %} " alt="img"> -->
-            </button>
+            <span class="password_btn" onclick="togglePassword()"><img src=" {% static 'svg/password-open.svg' %} " alt="img"></span>
         </div>
 
         {% if form.non_field_errors %}
         <div>{{ form.non_field_errors }}</div>
         {% endif %}
-        <button type="submit">Войти</button>
+        <div class="buttons">
+            <a href="{% url 'home' %}" class="but_back">Назад</a>
+            <button type="submit" class="auth_but">Войти</button>
+        </div>
     </form>
-    <a href="{% url 'home' %}" class="but_back">Назад</a>
-    <!-- {% comment %} <script src="../scripts/login.js"></script> {% endcomment %} -->
 </body>
 {% endblock %}
 </html>
+
+
+<script>
+    function togglePassword() {
+        const passwordField = document.querySelector('input[name="password"]');
+        if (passwordField.type === 'password') passwordField.type = 'text';
+        else passwordField.type = 'password';
+    }
+</script>
+  
+  
