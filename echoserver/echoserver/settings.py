@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'echo.apps.EchoConfig',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+USERNAME_FIELD = 'login'
 
 ROOT_URLCONF = 'echoserver.urls'
 
@@ -72,7 +75,7 @@ WSGI_APPLICATION = 'echoserver.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+AUTH_USER_MODEL = 'echo.Users'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

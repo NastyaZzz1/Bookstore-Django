@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'user_app/css/reg.css' %} ">
+    <title> {{ title }} </title>
+</head>
+<body>
+    <form action="", method="post">
+        {% csrf_token %}
+        <div class="reg-or-log">
+            <span class="log">Вход</span>
+            <a href="{% url 'register' %}" class="reg">Регистрация</a>
+        </div>
+
+        <div class="login">
+            {{ form.username }}
+        </div>
+
+        <div class="password">
+            {{ form.password }}
+            <button class="password_btn">
+                <!-- <img src=" {% static 'svg/password-open.svg' %} " alt="img"> -->
+            </button>
+        </div>
+
+        {% if form.non_field_errors %}
+        <div>{{ form.non_field_errors }}</div>
+        {% endif %}
+        <button type="submit">Войти</button>
+    </form>
+    <a href="{% url 'home' %}" class="but_back">Назад</a>
+    <!-- {% comment %} <script src="../scripts/login.js"></script> {% endcomment %} -->
+</body>
+{% endblock %}
+</html>

@@ -10,6 +10,7 @@ header {
 	margin-bottom: 2%;
 	display: flex;
 	align-items: center;
+	/* justify-content: space-between;	 */
 	background: linear-gradient(to bottom right, rgb(224, 224, 249), #c0c5ef);
 }
 

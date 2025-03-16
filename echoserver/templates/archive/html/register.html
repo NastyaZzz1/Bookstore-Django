@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'user_app/css/reg.css' %} ">
+    <title> {{ title }} </title>
+</head>
+<body>
+    <header class="header">
+        <div class="">chtoto</div>
+    </header>
+    <form action="", method="post">
+        {% csrf_token %}
+        <div class="reg-or-log">
+            <span class="reg">Регистрация</span>
+            <a href="{% url 'login' %}" class="log">Вход</a>
+        </div>
+
+        <div class="name">
+            {{ form.first_name }}
+        </div>
+
+        <div class="login">
+            {{ form.username }}
+        </div>
+
+        <div class="email">
+            {{ form.email }}
+        </div>
+
+        <div class="password">
+            {{ form.password1 }}
+            <button class="password_btn">
+                <!-- <img src=" {% static 'svg/password-open.svg' %} " alt="img"> -->
+            </button>
+        </div>
+
+        <div class="password">
+            {{ form.password2 }}
+            <button class="password_btn">
+                <!-- <img src=" {% static 'svg/password-open.svg' %} " alt="img"> -->
+            </button>
+        </div>
+
+        {% if form.non_field_errors %}
+        <div>{{ form.non_field_errors }}</div>
+        {% endif %}
+        <button type="submit">Сохранить</button>
+    </form>
+    <a href="{% url 'home' %}" class="but_back">Назад</a>
+    <!-- {% comment %} <script src="../scripts/login.js"></script> {% endcomment %} -->
+</body>
+{% endblock %}
+</html>

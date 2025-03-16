@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import ItemForm
 from .models import Books
 from django.core.paginator import Paginator
+from django.contrib.auth import login, logout, authenticate
+from .forms import RegisterForm, LoginForm
 
 
 
@@ -55,4 +57,38 @@ def addDataView(request):
 def delete_item(request, item_id):
     item = get_object_or_404(Books, id=item_id)
     item.delete()
+    return redirect('home')
+
+
+
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = RegisterForm()
+    return render(request, 'html/register.html', {'form': form})
+
+
+def user_login(request):
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+    else:
+        form = LoginForm()
+    return render(request, 'html/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
     return redirect('home')

@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinLengthValidator
 
 
 class Books(models.Model):
@@ -11,6 +13,20 @@ class Books(models.Model):
         return self.name
     
     class Meta:
-        managed = False
-        app_label = 'apfelschuss.votes'
         db_table = 'books'
+
+
+class Users(AbstractUser):
+    ROLES = (
+        ('user', 'Обычный пользователь'),
+        ('admin', 'Администратор'),
+    )
+    
+    email = models.EmailField(unique=True)
+    role = models.CharField(max_length=10, choices=ROLES, default='user')
+
+    def __str__(self):
+        return self.login
+    
+    class Meta:
+        db_table = 'users'
