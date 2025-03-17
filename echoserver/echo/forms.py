@@ -17,6 +17,7 @@ labels = {
 
 class RegisterForm(UserCreationForm):
     first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'inp-login', 'placeholder': 'Ваше имя'}))
+    last_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'inp-login', 'placeholder': 'Ваше имя'}))
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'inp-login', 'placeholder': '@ username'}))
     email = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'inp-email', 'placeholder': 'Почта'}))
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'inp-password', 'placeholder': 'Пароль',}))
@@ -24,9 +25,15 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = Users
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
 
 class LoginForm(AuthenticationForm):
     class Meta:
         model = Users
         fields = ['username', 'password']
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Users
+        fields = ['first_name', 'last_name', 'username', 'email']

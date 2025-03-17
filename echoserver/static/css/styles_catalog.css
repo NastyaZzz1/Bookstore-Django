@@ -38,6 +38,7 @@ li {
 	font-size: 1.3em;
 	font-weight: 600;
 	color: #206fc9;
+	text-decoration: none;
 }
 
 body, h1 { margin: 0; }
@@ -118,7 +119,7 @@ span {
 }
 
 
-button {
+.entry {
     width: 7.5em;
     height: 2.2em;
     color:#206fc9;
@@ -129,6 +130,15 @@ button {
 }
 
 .change_but {
+	padding: 4px 10px;
+	color:#206fc9;
+	text-decoration: none;
+	background-color: white;
+    border: 1px solid #CACACA;
+    border-radius: 18px;
+}
+
+.add_to_basket_but {
 	color: #206fc9;
 	text-decoration: none;
 	background-color: white;
@@ -140,7 +150,8 @@ button {
 	font-weight: bold;
 }
 
-button:hover, .change_but:not(:disabled):hover {
+
+.entry:hover, .change_but:hover, .add_to_basket_but:hover {
 	transform: scale(1.05);
 }
 
@@ -165,5 +176,23 @@ ul.pagination {
 #active { color:#6DCAFF; }
 
 .hand:hover, #notactive:hover { color: #7eaefd; }
+
+
+#delete_but {
+	border: none;
+	background-clip: content-box;
+	position: relative;
+    left: 525%;
+    bottom: 550%;
+    margin: 0;
+}
+
+#basket {
+	border: none;
+	background-clip: content-box;
+	background-color: transparent;
+}
+
+
 
 

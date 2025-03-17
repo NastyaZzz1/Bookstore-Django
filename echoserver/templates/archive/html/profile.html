@@ -1,0 +1,45 @@
+<!doctype html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/styles_change_and_add.css' %}">
+    <title>BOOKSTORE</title>
+  </head>
+  <body style="font-family: sans-serif">
+    <header>
+        <h1>Your profile card</h1>
+    </header>
+    <main class="main_edit">
+        <h2>Личные данные</h2>
+        <form method="POST" class="profile_form">
+            {% csrf_token %}
+            <div class="form-row">
+                <label>Имя:</label>
+                <p class="form_edit">{{ form.first_name }}</p>
+            </div>
+            <div class="form-row">
+                <label>Фамилия:</label>
+                <p class="form_edit">{{ form.last_name }}</p>
+            </div>
+            <div class="form-row">
+                <label>Login:</label>
+                <p class="form_edit">{{ form.username }}</p>
+            </div>
+            <div class="form-row">
+                <label>Email:</label>
+                <p class="form_edit">{{ form.email }}</p>
+            </div>
+            <div class="form-row">
+                <label>Дата регистрации:</label>
+                <p class="form_edit date">{{ user.date_joined }}</p>
+            </div>
+          <div class="buttons">
+            <a href="{% url 'home' %}" class="but_back">Назад</a>
+            <input type="submit" class="but_save" value="Сохранить" >
+          </div> 
+      </form>
+    </main>
+  </body>
+</html>

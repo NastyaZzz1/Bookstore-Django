@@ -15,14 +15,13 @@
         <h2>Заполни карточку книги</h2>
         <form method="POST">
           {% csrf_token %}
-          <label>Введите название</label><br>
-          <p class="form">
-            <input name="name" type="text" /></p>
-          <label>Введите автора</label><br>
+          <label>Введите название</label>
+          <p class="form"><input name="name" type="text" /></p>
+          <label>Введите автора</label>
           <p class="form"><input name="author" type="text" /></p>
-          <label>Введите cтоимость</label><br>
+          <label>Введите cтоимость</label>
           <p class="form"><input name="cost" type="number" /></p>
-          <label>Введите жанр</label><br>
+          <label>Введите жанр</label>
           <p class="form"><input name="genre" type="text" /></p>
           <div class="buttons">
             <a href="{% url 'home' %}" class="but_back">Назад</a>

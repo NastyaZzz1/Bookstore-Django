@@ -11,10 +11,14 @@
   <body style="font-family: sans-serif">
     <header>
         <h1>Book catalog</h1>
+        <button type="submit" id="basket" onclick="window.location.href='{% url 'basket' %}';">
+          <img src="{% static 'svg/basket.svg' %}">
+          Корзина
+        </button>
         {% if user.is_authenticated %}
-        <li> <a class="username">{{ user.username }}</a><a href="{% url 'logout' %}" class="logout">Выйти</a></li>
+        <li> <a href="{% url 'profile' %}" class="username">{{ user.username }}</a><a href="{% url 'logout' %}" class="logout">Выйти</a></li>
         {% else %}
-        <button type="submit" class="main-submit-white" onclick="window.location.href='{% url 'login' %}';">Войти</button>
+        <button type="submit" class="entry" onclick="window.location.href='{% url 'login' %}';">Войти</button>
         {% endif %}
     </header>
     <main>
@@ -34,16 +38,17 @@
           <p style="line-height: 0.5">{{ book.genre }}</p>
           <p style="line-height: 0.5" class="cost">{{ book.cost }} ₽</p>
           
-          {% if user.is_authenticated and user.is_superuser%}
-          <div class="but_change_del">
+          <div class="but_change_del">            
+            {% if user.is_authenticated and user.is_superuser%}
             <a href="{% url 'change_item' book.id %}" class="change_but">Изменить</a>
 
             <form action="{% url 'delete_item' book.id %}" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить этот элемент?');">
               {% csrf_token %}
-              <button type="submit">Удалить</button>
+              <button type="submit" id="delete_but"><img src="{% static 'svg/deletion.svg' %}"></button>
             </form>
+            {% endif %}
+            <button type="submit" class="add_to_basket_but">В корзину</button>
           </div>
-          {% endif %}
 
         </div>
         {% endfor %}

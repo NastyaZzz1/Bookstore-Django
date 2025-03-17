@@ -4,17 +4,11 @@
 	
 }
 
-.reg_or_log_form {
-    margin-top: 10%;
-}
+.reg_or_log_form { margin-top: 10%; }
 
-.field {
-    margin: 5% 0;
-}
+.field { margin: 5% 0; }
 
-span {
-    opacity: 100% !important;
-}
+span { opacity: 100% !important; }
 
 .reg_or_log {
     display: flex;
@@ -128,3 +122,8 @@ label { color: #89888f; }
 	transform: scale(1.05);
 }
 
+.form_edit { margin: 1% 0 7% 0; }
+
+.date { margin: 3% 0 7% 0; }
+
+.main_edit { margin-top: 3%; }

@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import ItemForm
 from .models import Books
 from django.core.paginator import Paginator
+from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from .forms import RegisterForm, LoginForm
+from .forms import *
 
 
 
@@ -12,9 +12,7 @@ def homePageView(request):
     count = Books.objects.all().count()
 
     paginator = Paginator(all_books, 9)
-
     page_number = request.GET.get('page')
-
     page_obj = paginator.get_page(page_number)
 
     context = {
@@ -60,9 +58,6 @@ def delete_item(request, item_id):
     return redirect('home')
 
 
-
-
-
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -92,3 +87,23 @@ def user_login(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+
+def profile_view(request):
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Профиль успешно обновлен!')
+            return redirect('home')
+        else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+    else:
+        form = ProfileEditForm(instance=request.user)
+
+    return render(request, 'html/profile.html', {'form': form})
+
+
+def basket_view(request):
+     
+     return render(request, 'html/basket.html', {})
