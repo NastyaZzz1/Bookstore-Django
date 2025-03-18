@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Books
+from .models import *
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
@@ -52,7 +52,7 @@ def addDataView(request):
         return render(request, 'html/add_book.html', context={})
 
 
-def delete_item(request, item_id):
+def delete_item(item_id):
     item = get_object_or_404(Books, id=item_id)
     item.delete()
     return redirect('home')
@@ -60,7 +60,12 @@ def delete_item(request, item_id):
 
 def register(request):
     if request.method == 'POST':
+        print("POST-данные:", request.POST)
+
         form = RegisterForm(request.POST)
+        
+        print("FORM:", form)
+
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -105,5 +110,56 @@ def profile_view(request):
 
 
 def basket_view(request):
-     
-     return render(request, 'html/basket.html', {})
+    if request.user.is_authenticated:
+        cart = Cart.objects.filter(user=request.user).first()
+    else:
+        session_key = request.session.session_key
+        cart = Cart.objects.filter(session_key=session_key).first()
+
+    if not cart:
+        cart = Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                  session_key=request.session.session_key if not request.user.is_authenticated else None)
+
+    return render(request, 'html/basket.html', {'cart': cart})
+
+
+def add_to_cart(request, item_id):
+    product = get_object_or_404(Books, id=item_id)
+    
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user)
+    else:
+        session_key = request.session.session_key
+        if not session_key:
+            request.session.create()
+            session_key = request.session.session_key
+        cart, created = Cart.objects.get_or_create(session_key=session_key)
+
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    messages.success(request, f"{product.name} added to cart!")
+    return redirect('home') 
+
+
+def delete_from_cart(request, item_id):
+    item = get_object_or_404(CartItem, id=item_id)
+    if item.quantity > 1:
+        item.quantity -= 1
+        item.save()
+    else:
+        item.delete()
+
+    return redirect('basket')
+
+def add_count_in_cart(request, item_id):
+    item = get_object_or_404(CartItem, id=item_id)
+    item.quantity += 1
+    item.save()
+
+    return redirect('basket')
+
+    

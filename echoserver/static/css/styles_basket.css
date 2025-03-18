@@ -1,0 +1,153 @@
+@font-face {
+	font-family: 'Yagi';
+	src: url("{% static 'fonts/DXS Yagi Bold_0.ttf' %}") format("truetype");
+}
+
+header {
+	padding: 0% 4%;
+	height: 65px;
+	margin-bottom: 2%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;	
+	background: linear-gradient(to bottom right, rgb(224, 224, 249), #c0c5ef);
+}
+
+body, p { margin: 0; }
+
+h1 { font-family: 'Yagi'; }
+
+h2 {
+    margin-top: 5%;
+}
+
+.cart_item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 2% 0;
+    background-color: rgb(241, 241, 252);
+    
+    padding: 2%;
+    font-size: 1.1em;
+    border-radius: 16px;
+}
+
+.cart_items {
+    width: 50%;
+}
+
+main {
+    margin-left: 4%;
+    display: flex;
+    justify-content:space-between;
+}
+
+.cost {
+    position: absolute;
+    right: 3%;
+}
+
+.count_but {
+    position: absolute;
+    right: 25%;
+}
+
+.total_price {
+    width: 20%;
+    margin: 4% 10% 0 0;
+}
+
+.total_price_text {
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+.minus, .plus, .back_home {
+    text-decoration: none;
+    color: black;
+}
+
+span {
+    padding-left: 15%;
+}
+
+.minus, .plus {
+    padding: 1px 6px;
+    background-color: rgb(235, 235, 235);
+    border-radius: 6px;
+}
+
+.minus:hover, .plus:hover {
+    background-color: rgb(214, 214, 214);
+}
+
+.cart_item:hover {
+    background-color: rgb(233, 236, 252);
+
+}
+
+.back_home {
+    font-size: 0.9em;
+}
+
+.back_home:hover {
+    color: #6DCAFF;
+}
+
+.entry {
+    width: 7.5em;
+    height: 2.2em;
+    color:#206fc9;
+    background-color: white;
+    border: 1px solid #CACACA;
+    border-radius: 18px;
+    font-weight: bold;
+}
+
+.logout {
+	color: black;
+	text-decoration: none;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 18px;
+	padding: 4px 14px;
+	font-size: 0.9em;
+	margin-left: 12%;
+}
+
+.logout:hover {
+	border: 1px solid #6DCAFF;
+}
+
+.username {
+	font-size: 1.3em;
+	font-weight: 600;
+	color: #206fc9;
+	text-decoration: none;
+}
+
+li {
+	list-style-type: none;
+	margin-right: 2%;
+}
+
+.order {
+	box-shadow: #a6c8ee 4px 4px 10px 0;
+	border-radius: 8px;
+    border: none;
+	background-color: #8fbaff;
+	color: white;
+	font-size: 1.3em;
+    width: 70%;
+    height: 40px;
+    margin-top: 6%;
+}
+
+.order:not(:disabled):hover {
+	transform: scale(1.02);
+}
+
+.order:not(:disabled):active {
+	box-shadow: #a6c8ee 0 0 0 0;
+}

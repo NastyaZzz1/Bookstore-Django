@@ -1,20 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 {% load static %}
-<html>
+<html lang="ru">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/styles_change_and_add.css' %}">
-    <title>BOOKSTORE</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="stylesheet" href="{% static 'css/styles_basket.css' %}">
+      <title>BOOKSTORE</title>
   </head>
   <body style="font-family: sans-serif">
     <header>
-        <h1>Basket</h1>
+      <h1>Basket</h1>
+      {% if user.is_authenticated %}
+      <li> <a href="{% url 'profile' %}" class="username">{{ user.username }}</a><a href="{% url 'logout' %}" class="logout">Выйти</a></li>
+      {% else %}
+      <button type="submit" class="entry" onclick="window.location.href='{% url 'login' %}';">Войти</button>
+      {% endif %}
     </header>
-    <main class="main_edit">
-        <h2>Ваша корзина</h2>
-        <a href="{% url 'home' %}" class="but_back">Назад</a>
+    <main>
+      
+      <div class="cart_items">
+        <a href="{% url 'home' %}" class="back_home">← Продолжить покупки</a>
+        <h2>Товары в вашей корзине</h2>
+        {% for item in cart.items.all %}
+        <div class="cart_item">
+            <p class="name">{{ item.product.name }}</p>
+            <div class="count_but">
+              <a href="{% url 'delete_from_cart' item.id %}" class="minus">-</a>
+              {{ item.quantity }}
+              <a href="{% url 'add_count_in_cart' item.id %}" class="plus">+</a>
+            </div>
+            <p class="cost">{{ item.total_price }} ₽</p>
+        </div>
+        {% empty %}
+        <p>Ваша корзина пуста.</p>
+        {% endfor %}
+      </div>
 
+      <div class="total_price">
+        <p class="total_price_text">Итого <span>{{ cart.total_price }} ₽</span></p>
+        <button class="order">Заказать</button><br>
+
+      </div>
     </main>
   </body>
 </html>

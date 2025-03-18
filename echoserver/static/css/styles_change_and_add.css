@@ -107,8 +107,8 @@ label { color: #89888f; }
 }
 
 .password_btn { top: 39%; }
-.password_1_btn_reg { top: 54%; }
-.password_2_btn_reg { top: 62%; }
+.password_1_btn_reg { top: 62%; }
+.password_2_btn_reg { top: 69%; }
 
 .but_save:not(:disabled):active {
     box-shadow: #b4ceec 0 0 0;

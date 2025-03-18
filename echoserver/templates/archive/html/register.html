@@ -20,6 +20,10 @@
             {{ form.first_name }}
         </div>
 
+        <div class="last_name field">
+            {{ form.last_name }}
+        </div>
+
         <div class="login field">
             {{ form.username }}
         </div>
@@ -44,6 +48,16 @@
 
         {% if form.non_field_errors %}
         <div>{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
         {% endif %}
         <div class="buttons">
             <a href="{% url 'home' %}" class="but_back">Назад</a>

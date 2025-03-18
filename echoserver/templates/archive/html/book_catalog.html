@@ -13,7 +13,9 @@
         <h1>Book catalog</h1>
         <button type="submit" id="basket" onclick="window.location.href='{% url 'basket' %}';">
           <img src="{% static 'svg/basket.svg' %}">
-          Корзина
+        </button>
+        <button type="submit" id="orders" onclick="window.location.href='{% url 'orders' %}';">
+          <img src="{% static 'svg/orders.svg' %}">
         </button>
         {% if user.is_authenticated %}
         <li> <a href="{% url 'profile' %}" class="username">{{ user.username }}</a><a href="{% url 'logout' %}" class="logout">Выйти</a></li>
@@ -47,7 +49,7 @@
               <button type="submit" id="delete_but"><img src="{% static 'svg/deletion.svg' %}"></button>
             </form>
             {% endif %}
-            <button type="submit" class="add_to_basket_but">В корзину</button>
+            <a href="{% url 'add_to_cart' book.id %}" class="add_to_basket_but">В корзину</a>
           </div>
 
         </div>
