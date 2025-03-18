@@ -187,7 +187,7 @@ ul.pagination {
     margin: 0;
 }
 
-#basket {
+#basket, #orders {
 	border: none;
 	background-clip: content-box;
 	background-color: transparent;

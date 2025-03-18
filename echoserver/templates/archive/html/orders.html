@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="stylesheet" href="{% static 'css/styles_basket.css' %}">
+      <title>BOOKSTORE</title>
+  </head>
+  <body style="font-family: sans-serif">
+    <header>
+      <h1>Orders</h1>
+      {% if user.is_authenticated %}
+      <li> <a href="{% url 'profile' %}" class="username">{{ user.username }}</a><a href="{% url 'logout' %}" class="logout">Выйти</a></li>
+      {% else %}
+      <button type="submit" class="entry" onclick="window.location.href='{% url 'login' %}';">Войти</button>
+      {% endif %}
+    </header>
+    <main>
+      
+      <div class="cart_items">
+        <a href="{% url 'home' %}" class="back_home">← Продолжить покупки</a>
+        <h2>Ваши заказы</h2>
+        {% for item in cart.items.all %}
+        <div class="cart_item">
+            <p class="name">{{ item.product.name }}</p>
+            <div class="count_but">
+              <a href="{% url 'delete_from_cart' item.id %}" class="minus">-</a>
+              {{ item.quantity }}
+              <a href="{% url 'add_count_in_cart' item.id %}" class="plus">+</a>
+            </div>
+            <p class="cost">{{ item.total_price }} ₽</p>
+        </div>
+        {% empty %}
+        <p>Доставок пока нет</p>
+        {% endfor %}
+      </div>
+
+    </main>
+  </body>
+</html>

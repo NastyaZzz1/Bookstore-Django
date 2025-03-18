@@ -162,4 +162,9 @@ def add_count_in_cart(request, item_id):
 
     return redirect('basket')
 
+
+def orders_view(request):
+    
+    
+    return render(request, 'html/orders.html', {})
     
