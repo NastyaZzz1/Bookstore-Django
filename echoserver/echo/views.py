@@ -23,7 +23,6 @@ def homePageView(request):
     return render(request, 'html/book_catalog.html', context=context)
 
 
-
 def changeDataView(request, item_id):
     book = get_object_or_404(Books, id=item_id)
 
@@ -36,7 +35,6 @@ def changeDataView(request, item_id):
         form = ItemForm(instance=book)
 
     return render(request, 'html/change_book.html', {'form': form, 'book': book})
-
 
 
 def addDataView(request):
@@ -56,6 +54,7 @@ def delete_item(item_id):
     item = get_object_or_404(Books, id=item_id)
     item.delete()
     return redirect('home')
+
 
 
 def register(request):
@@ -89,6 +88,7 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'html/login.html', {'form': form})
 
+
 def logout_view(request):
     logout(request)
     return redirect('home')
@@ -109,6 +109,7 @@ def profile_view(request):
     return render(request, 'html/profile.html', {'form': form})
 
 
+
 def basket_view(request):
     if request.user.is_authenticated:
         cart = Cart.objects.filter(user=request.user).first()
@@ -117,10 +118,12 @@ def basket_view(request):
         cart = Cart.objects.filter(session_key=session_key).first()
 
     if not cart:
-        cart = Cart.objects.create(user=request.user if request.user.is_authenticated else None,
-                                  session_key=request.session.session_key if not request.user.is_authenticated else None)
+        cart = Cart.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            session_key=request.session.session_key if not request.user.is_authenticated else None)
 
     return render(request, 'html/basket.html', {'cart': cart})
+
 
 
 def add_to_cart(request, item_id):
@@ -145,6 +148,7 @@ def add_to_cart(request, item_id):
     return redirect('home') 
 
 
+
 def delete_from_cart(request, item_id):
     item = get_object_or_404(CartItem, id=item_id)
     if item.quantity > 1:
@@ -152,19 +156,49 @@ def delete_from_cart(request, item_id):
         item.save()
     else:
         item.delete()
-
     return redirect('basket')
+
+
 
 def add_count_in_cart(request, item_id):
     item = get_object_or_404(CartItem, id=item_id)
     item.quantity += 1
     item.save()
-
     return redirect('basket')
 
 
+
 def orders_view(request):
-    
-    
-    return render(request, 'html/orders.html', {})
-    
+    if request.user.is_authenticated:
+        orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    else:
+        session_key = request.session.session_key
+        orders = Order.objects.filter(session_key=session_key).order_by('-created_at')
+
+    return render(request, 'html/orders.html', {'orders': orders})
+
+
+
+def add_to_order(request):
+    if request.user.is_authenticated:
+        cart = Cart.objects.filter(user=request.user).first()
+    else:
+        session_key = request.session.session_key
+        cart = Cart.objects.filter(session_key=session_key).first()
+
+    if not cart or not cart.items.exists():
+        return redirect('home')
+
+    order = Order.objects.create(
+        user=request.user if request.user.is_authenticated else None,
+        session_key=request.session.session_key if not request.user.is_authenticated else None,
+    )
+    for cart_item in cart.items.all():
+        OrderItem.objects.create(
+            order=order,
+            product=cart_item.product,
+            quantity=cart_item.quantity,
+        )
+
+    cart.items.all().delete()
+    return redirect('home')   

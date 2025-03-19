@@ -21,15 +21,23 @@
       <div class="cart_items">
         <a href="{% url 'home' %}" class="back_home">← Продолжить покупки</a>
         <h2>Ваши заказы</h2>
-        {% for item in cart.items.all %}
+        {% for order in orders %}
         <div class="cart_item">
-            <p class="name">{{ item.product.name }}</p>
-            <div class="count_but">
-              <a href="{% url 'delete_from_cart' item.id %}" class="minus">-</a>
-              {{ item.quantity }}
-              <a href="{% url 'add_count_in_cart' item.id %}" class="plus">+</a>
+            <div class="order_about">
+              <p class="name_order">Заказ {{ order.id }}</p>
+              <p class="date"><span class="grey_color_order">Дата оформления заказа:</span> {{ order.created_at }}</p>
+              <p class="price"><span class="grey_color_order">Сумма заказа:</span> <span class="blue_color_price">{{ order.total_price }} ₽</span></p>
             </div>
-            <p class="cost">{{ item.total_price }} ₽</p>
+
+            <div>
+              {% for item in order.items.all %}
+              <div class="cart_item_in_order">
+                <p class="name">{{ item.product.name }}</p>
+                  <div class="count_but">{{ item.quantity }} шт.</div>
+                  <p class="cost">{{ item.total_price }} ₽</p>
+              </div>
+              {% endfor %}
+            </div>
         </div>
         {% empty %}
         <p>Доставок пока нет</p>

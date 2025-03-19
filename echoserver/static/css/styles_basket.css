@@ -17,25 +17,23 @@ body, p { margin: 0; }
 
 h1 { font-family: 'Yagi'; }
 
-h2 {
-    margin-top: 5%;
-}
+h2 { margin-top: 5%; }
 
-.cart_item {
+.cart_item, .cart_item_in_order {
     position: relative;
     display: flex;
     flex-direction: column;
-    margin: 2% 0;
     background-color: rgb(241, 241, 252);
-    
     padding: 2%;
     font-size: 1.1em;
     border-radius: 16px;
 }
 
-.cart_items {
-    width: 50%;
+.cart_item {
+    margin: 2% 0;
 }
+
+.cart_items { width: 50%; }
 
 main {
     margin-left: 4%;
@@ -68,9 +66,7 @@ main {
     color: black;
 }
 
-span {
-    padding-left: 15%;
-}
+.price_in_cart { padding-left: 15%; }
 
 .minus, .plus {
     padding: 1px 6px;
@@ -87,13 +83,9 @@ span {
 
 }
 
-.back_home {
-    font-size: 0.9em;
-}
+.back_home { font-size: 0.9em; }
 
-.back_home:hover {
-    color: #6DCAFF;
-}
+.back_home:hover { color: #6DCAFF; }
 
 .entry {
     width: 7.5em;
@@ -116,9 +108,7 @@ span {
 	margin-left: 12%;
 }
 
-.logout:hover {
-	border: 1px solid #6DCAFF;
-}
+.logout:hover { border: 1px solid #6DCAFF; }
 
 .username {
 	font-size: 1.3em;
@@ -139,9 +129,10 @@ li {
 	background-color: #8fbaff;
 	color: white;
 	font-size: 1.3em;
-    width: 70%;
-    height: 40px;
-    margin-top: 6%;
+    padding: 0.6% 4%;
+    text-decoration: none;
+    position: absolute;
+    top: 200px;
 }
 
 .order:not(:disabled):hover {
@@ -150,4 +141,28 @@ li {
 
 .order:not(:disabled):active {
 	box-shadow: #a6c8ee 0 0 0 0;
+}
+
+
+.order_about {
+    padding: 2% 2% 0 2%;
+}
+
+.name_order {
+    font-size: 1.2em;
+    font-weight: 600;
+    padding-bottom: 2%;
+}
+
+.date {
+    padding-bottom: 1%;
+}
+
+.grey_color_order {
+    color:rgb(91, 90, 90);
+}
+
+.blue_color_price {
+    color:#6DCAFF;
+    font-weight: 600;
 }

@@ -66,3 +66,38 @@ class CartItem(models.Model):
     
     class Meta:
         db_table = 'cart_item'
+
+
+class Order(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    session_key = models.CharField(max_length=40, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def total_price(self):
+        return sum(item.product.cost * item.quantity for item in self.items.all())
+
+    def __str__(self):
+        if self.user:
+            return f"Order for user: {self.user.username}"
+        else:
+            return f"Order (Session: {self.session_key})"
+        
+    class Meta:
+        db_table = 'order'
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Books, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    @property
+    def total_price(self):
+        return self.product.cost * self.quantity
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name} in cart {self.cart.id}"
+    
+    class Meta:
+        db_table = 'order_item'

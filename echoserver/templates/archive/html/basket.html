@@ -37,9 +37,8 @@
       </div>
 
       <div class="total_price">
-        <p class="total_price_text">Итого <span>{{ cart.total_price }} ₽</span></p>
-        <button class="order">Заказать</button><br>
-
+        <p class="total_price_text">Итого <span class="price_in_cart">{{ cart.total_price }} ₽</span></p>
+        <a href="{% url 'add_to_order' %}" class="order">Заказать</a>
       </div>
     </main>
   </body>

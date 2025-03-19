@@ -193,6 +193,16 @@ ul.pagination {
 	background-color: transparent;
 }
 
+#basket {
+	position: absolute;
+    right: 30%;
+}
+
+#orders {
+	position: absolute;
+    right: 25%;
+}
+
 
 
 
