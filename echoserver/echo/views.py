@@ -1,3 +1,5 @@
+from venv import logger
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import *
 from django.core.paginator import Paginator
@@ -8,15 +10,21 @@ from .forms import *
 
 
 def homePageView(request):
-    all_books = Books.objects.all()
+    sort_by = request.GET.get('sort')
+    books = Books.objects.all()
     count = Books.objects.all().count()
 
-    paginator = Paginator(all_books, 9)
+    if sort_by == 'price_asc':
+        books = books.order_by('cost')
+    elif sort_by == 'price_desc':
+        books = books.order_by('-cost')
+
+    paginator = Paginator(books, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
-        'all_books' : all_books,
+        'all_books' : books,
         'count' : count,
         'page_obj' : page_obj   
     }
@@ -59,12 +67,7 @@ def delete_item(item_id):
 
 def register(request):
     if request.method == 'POST':
-        print("POST-данные:", request.POST)
-
         form = RegisterForm(request.POST)
-        
-        print("FORM:", form)
-
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -72,6 +75,15 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'html/register.html', {'form': form})
+
+
+def check_username(request):
+    username = request.GET.get('username')
+    if not username:
+        return JsonResponse({'error': 'Username parameter is required'}, status=400)
+    
+    is_available = not Users.objects.filter(username=username).exists()
+    return JsonResponse({'is_available': is_available})
 
 
 def user_login(request):

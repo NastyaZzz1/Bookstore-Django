@@ -27,10 +27,12 @@
         <div class="login field">
             {{ form.username }}
         </div>
+        <small id="login-help" class="form-text text-danger" style="display:none; color:rgb(237, 161, 161)"></small>
 
         <div class="email field">
             {{ form.email }}
         </div>
+        <small id="email-help" class="form-text text-danger" style="display:none; color:rgb(237, 161, 161)"></small>
 
         <div class="password field">
             {{ form.password1 }}
@@ -38,6 +40,7 @@
                 <img src=" {% static 'svg/password-open.svg' %} " alt="img">
             </button>
         </div>
+        <small id="password-help" class="form-text text-danger" style="display:none; color:rgb(237, 161, 161)"></small>
 
         <div class="password field">
             {{ form.password2 }}
@@ -61,7 +64,7 @@
         {% endif %}
         <div class="buttons">
             <a href="{% url 'home' %}" class="but_back">Назад</a>
-            <button type="submit" class="auth_but">Сохранить</button>
+            <button type="submit" class="auth_but" id="submit-btn">Сохранить</button>
         </div>
     </form>
 </body>
@@ -80,4 +83,100 @@
         if (passwordField.type === 'password') passwordField.type = 'text';
         else passwordField.type = 'password';
     }
-</script>
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const emailInput = document.getElementById('id_email');
+        const passwordInput = document.getElementById('id_password1');
+        const usernameInput = document.getElementById('id_username');
+        const submitBtn = document.getElementById('submit-btn');
+        const emailHelp = document.getElementById('email-help');
+        const passwordHelp = document.getElementById('password-help');
+        const usernameHelp = document.getElementById('login-help');
+        
+        function validateEmail(email) {
+            const re = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+            return re.test(email);
+        }
+        
+        function validatePassword(password) {
+            return password?.length >= 6;
+        }
+        
+        function validateForm() {
+            const isEmailValid = validateEmail(emailInput.value);
+            const isPasswordValid = validatePassword(passwordInput.value);
+            
+            submitBtn.disabled = !(isEmailValid && isPasswordValid);
+            return isEmailValid && isPasswordValid;
+        }
+        
+        // Валидация email "на лету"
+        emailInput.addEventListener('input', function() {
+            if (!validateEmail(this.value)) {
+                emailHelp.textContent = 'Введите корректный email-адрес';
+                emailHelp.style.display = 'block';
+                this.classList.add('is-invalid');
+            } else {
+                emailHelp.style.display = 'none';
+                this.classList.remove('is-invalid');
+            }
+            validateForm();
+        });
+        
+        // Валидация пароля "на лету"
+        passwordInput.addEventListener('input', function() {
+            if (!validatePassword(this.value)) {
+                passwordHelp.textContent = 'Пароль должен содержать не менее 6 символов';
+                passwordHelp.style.display = 'block';
+                this.classList.add('is-invalid');
+            } else {
+                passwordHelp.style.display = 'none';
+                this.classList.remove('is-invalid');
+            }
+            validateForm();
+        });
+
+
+        function checkUsernameUnique(username) {   
+            fetch('/api/check_username/?username=' + encodeURIComponent(username))
+                .then(response => response.json())
+                .then(data => {
+                    isUsernameUnique = data.is_available;
+                    updateUsernameError();
+                    validateForm();
+                    console.log("Сервер ответил:", data);
+                })
+                .catch(error => {
+                    console.error('Error checking username:', error);
+                });
+        }
+
+        function updateUsernameError() {
+            if (!isUsernameUnique) {
+                usernameHelp.textContent = 'Этот логин уже занят';
+                usernameHelp.style.display = 'block';
+                usernameInput.classList.add('is-invalid');
+            } else {
+                usernameHelp.style.display = 'none';
+                usernameInput.classList.remove('is-invalid');
+            }
+        }
+
+        usernameInput.addEventListener('input', function() {
+            const username = this.value;
+            isUsernameUnique = false;
+            
+            updateUsernameError();
+
+            checkUsernameUnique(username);
+            
+            // clearTimeout(window.usernameCheckTimeout);
+            // window.usernameCheckTimeout = setTimeout(() => {
+            //     checkUsernameUnique(username);
+            // }, 500);
+        });
+        
+        validateForm();
+    });
+    </script>

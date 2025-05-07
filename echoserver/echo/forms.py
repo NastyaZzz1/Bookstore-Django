@@ -20,7 +20,7 @@ class RegisterForm(UserCreationForm):
     last_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'inp-login', 'placeholder': 'Ваша фамилия'}))
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'inp-login', 'placeholder': '@ username'}))
     email = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'inp-email', 'placeholder': 'Почта'}))
-    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'inp-password', 'placeholder': 'Пароль',}))
+    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'inp-password', 'placeholder': 'Пароль',}), min_length=6)
     password2 = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput(attrs={'class': 'inp-password-confirm', 'placeholder': 'Подтверждение пароля',}))
 
     class Meta:

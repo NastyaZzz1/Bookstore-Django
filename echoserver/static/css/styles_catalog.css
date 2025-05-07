@@ -204,5 +204,17 @@ ul.pagination {
 }
 
 
+.btn {
+	width: 13em;
+    height: 2.2em;
+    color:#206fc9 !important;
+    background-color: white;
+    border: 1px solid #CACACA;
+    border-radius: 18px;
+    font-weight: bold;
+}
+  
+
+
 
 

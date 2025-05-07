@@ -18,4 +18,5 @@ urlpatterns = [
     path('add_count_in_cart/<int:item_id>/', views.add_count_in_cart, name='add_count_in_cart'),
     path('orders/', views.orders_view, name='orders'),
     path('add_to_order/', views.add_to_order, name='add_to_order'),
+    path('api/check_username/', views.check_username, name='check_username'),
 ]
